@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Coca Cola",
+        "price": 2.5
+    },
+    {
+        "name": "Fresh Orange Juice",
+        "price": 3.75
+    },
+    {
+        "name": "Espresso Coffee",
+        "price": 2.0
+    }
+]

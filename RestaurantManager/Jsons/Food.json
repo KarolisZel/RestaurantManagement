@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Margherita Pizza",
+        "price": 8.5
+    },
+    {
+        "name": "Caesar Salad",
+        "price": 6.75
+    },
+    {
+        "name": "Grilled Salmon",
+        "price": 12.99
+    },
+    {
+        "name": "Spaghetti Carbonara",
+        "price": 10.5
+    },
+    {
+        "name": "Chicken Wings",
+        "price": 7.25
+    }
+]
