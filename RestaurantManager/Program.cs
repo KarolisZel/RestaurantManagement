@@ -132,7 +132,10 @@ class Program
             Console.WriteLine("Have a nice day!\n\n");
         }
         else
-            Console.WriteLine("Customer refused the receipt");
+        {
+            Console.WriteLine("Customer refused the receipt. Sending via email...");
+            FileManager.SendReceiptViaEmail("to@email.com", order);
+        }
 
         FileManager.SaveRestaurantReceipt(order);
         TableService.Tables.First(x => x.TableNumber == order.Table.TableNumber).IsAvailable = true;

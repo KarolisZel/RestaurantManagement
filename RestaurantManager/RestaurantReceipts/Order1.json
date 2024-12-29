@@ -13,13 +13,9 @@
     {
       "Name": "Chicken Wings",
       "Price": 7.25
-    },
-    {
-      "Name": "Caesar Salad",
-      "Price": 6.75
     }
   ],
-  "OrderTime": "2024-12-29T17:37:24.9182336+02:00",
+  "OrderTime": "2024-12-29T20:45:57.4678265+02:00",
   "WaiterName": "Koral",
-  "Total": 16.50
+  "Total": 9.75
 }

@@ -46,9 +46,9 @@ public class OrderService
         return order;
     }
 
-    public Order AddItem(Order order, MenuItem item)
-    {
-        order.Items.Add(item);
-        return order;
-    }
+    // public Order AddItem(Order order, MenuItem item)
+    // {
+    //     order.Items.Add(item);
+    //     return order;
+    // }
 }

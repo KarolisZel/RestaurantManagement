@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Folder Include="EmailReceipts\" />
       <Folder Include="RestaurantReceipts\" />
     </ItemGroup>
 
