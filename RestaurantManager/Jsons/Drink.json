@@ -1,14 +1,14 @@
 [
     {
-        "name": "Coca Cola",
-        "price": 2.5
+        "Name": "Coca Cola",
+        "Price": 2.5
     },
     {
-        "name": "Fresh Orange Juice",
-        "price": 3.75
+        "Name": "Fresh Orange Juice",
+        "Price": 3.75
     },
     {
-        "name": "Espresso Coffee",
-        "price": 2.0
+        "Name": "Espresso Coffee",
+        "Price": 2.0
     }
 ]

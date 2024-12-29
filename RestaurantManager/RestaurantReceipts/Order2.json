@@ -1,0 +1,17 @@
+{
+  "OrderId": 2,
+  "Table": {
+    "TableNumber": 1,
+    "SeatCount": 4,
+    "IsAvailable": false
+  },
+  "Items": [
+    {
+      "Name": "Coca Cola",
+      "Price": 2.5
+    }
+  ],
+  "OrderTime": "2024-12-29T17:12:44.0208171+02:00",
+  "WaiterName": "Koral",
+  "Total": 2.5
+}

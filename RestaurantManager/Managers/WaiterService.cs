@@ -30,12 +30,17 @@ static class WaiterService
         WaiterList.Add(waiter);
     }
 
+    // public static List<Waiter> GetWaiterList()
+    // {
+    //     return WaiterList;
+    // }
+
     public static Waiter Login()
     {
         if (WaiterList.Count == 0)
         {
             Console.WriteLine("No waiters in the system. Please add a waiter first.");
-            return null;
+            AddWaiter();
         }
 
         Console.WriteLine("Enter name:");

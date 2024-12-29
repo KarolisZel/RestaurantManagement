@@ -1,0 +1,25 @@
+{
+  "OrderId": 1,
+  "Table": {
+    "TableNumber": 1,
+    "SeatCount": 4,
+    "IsAvailable": false
+  },
+  "Items": [
+    {
+      "Name": "Coca Cola",
+      "Price": 2.5
+    },
+    {
+      "Name": "Chicken Wings",
+      "Price": 7.25
+    },
+    {
+      "Name": "Caesar Salad",
+      "Price": 6.75
+    }
+  ],
+  "OrderTime": "2024-12-29T17:37:24.9182336+02:00",
+  "WaiterName": "Koral",
+  "Total": 16.50
+}

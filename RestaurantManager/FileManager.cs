@@ -13,20 +13,20 @@ static class FileManager
     public static List<FoodItem> LoadFoodMenu()
     {
         var jsonData = File.ReadAllText(@$"{MenuJsons}\Food.json");
-        return JsonSerializer.Deserialize<List<FoodItem>>(jsonData);
+        return JsonSerializer.Deserialize<List<FoodItem>>(jsonData, JsonSerializerOptions.Default);
     }
 
     public static List<DrinkItem> LoadDrinkMenu()
     {
-        var jsonData = File.ReadAllText(@$"{MenuJsons}\Food.json");
-        return JsonSerializer.Deserialize<List<DrinkItem>>(jsonData);
+        var jsonData = File.ReadAllText(@$"{MenuJsons}\Drink.json");
+        return JsonSerializer.Deserialize<List<DrinkItem>>(jsonData, JsonSerializerOptions.Default);
     }
 
     public static void SaveRestaurantReceipt(Order order)
     {
         Directory.CreateDirectory(RestaurantReceipts);
 
-        var filePath = Path.Combine(RestaurantReceipts, $"{order.OrderId}.json");
+        var filePath = Path.Combine(RestaurantReceipts, $"Order{order.OrderId}.json");
         File.Create(filePath).Close();
 
         var receiptData = JsonSerializer.Serialize(

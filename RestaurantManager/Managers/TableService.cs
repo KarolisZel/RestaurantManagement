@@ -1,37 +1,59 @@
 namespace RestaurantManager;
 
-public class TableService
+public static class TableService
 {
-    public List<Table> Tables { get; set; } = new();
+    public static List<Table> Tables { get; set; } = new();
     public static Dictionary<int, string> TableAvailability { get; set; } = new();
 
-    public Table GetAvailableTable(int seats)
+    public static Table GetAvailableTable(int seats)
     {
-        return Tables.FirstOrDefault(t => t.IsAvailable && t.SeatCount >= seats);
+        try
+        {
+            var table = Tables.FirstOrDefault(t => t.IsAvailable && t.SeatCount >= seats);
+
+            return table;
+        }
+        catch (NullReferenceException e)
+        {
+            Console.WriteLine($"Table is null {e.Message}");
+        }
+
+        return null;
     }
 
-    private void CreateTablesList()
+    public static Table GetTable(int tableNumber)
+    {
+        return Tables.FirstOrDefault(x => x.TableNumber == tableNumber);
+    }
+
+    private static void CreateTablesList()
     {
         for (int i = 0; i < 11; i++)
         {
-            if (i < 6)
-                Tables.Add(new Table(i + 1, 4));
-
-            Tables.Add(new Table(i + 1, 2));
+            Tables.Add(i < 6 ? new Table(i + 1, 4) : new Table(i + 1, 2));
         }
     }
 
-    public void CreateTableAvailability()
+    public static Dictionary<int, string> CreateTableAvailability()
     {
         if (Tables.Count == 0)
         {
             Console.WriteLine("Table list empty. Creating Tables...");
             CreateTablesList();
-        }
 
-        foreach (var table in Tables)
-        {
-            TableAvailability.Add(table.TableNumber, table.IsAvailable ? "Available" : "Taken");
+            foreach (var table in Tables)
+                TableAvailability.Add(table.TableNumber, table.IsAvailable ? "Available" : "Taken");
         }
+        else
+        {
+            foreach (var table in Tables)
+                TableAvailability[table.TableNumber] = table.IsAvailable ? "Available" : "Taken";
+        }
+        return TableAvailability;
+    }
+
+    public static int GetTableSeatCount(int tableNumber)
+    {
+        return Tables.FirstOrDefault(x => x.TableNumber == tableNumber).SeatCount;
     }
 }
