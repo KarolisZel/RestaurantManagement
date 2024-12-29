@@ -5,7 +5,7 @@ public class OrderService
     public List<Order> Orders = new();
     private int NextOrderId = 1;
 
-    public void PlaceOrder(Table table, List<MenuItem> items, string waiterName)
+    public Order PlaceOrder(Table table, List<MenuItem> items, string waiterName)
     {
         var order = new Order
         {
@@ -17,7 +17,7 @@ public class OrderService
         };
         Orders.Add(order);
         // table.IsAvailable = false;
-        // return order;
+        return order;
     }
 
     public Order RemoveItem(Order order)

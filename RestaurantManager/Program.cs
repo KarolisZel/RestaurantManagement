@@ -4,7 +4,8 @@ namespace RestaurantManager;
 
 class Program
 {
-    private static OrderService OrderService = new();
+    private static readonly OrderService OrderService = new();
+    private static List<Order> Orders { get; set; } = new();
     private static List<FoodItem> FoodMenu { get; set; } = new();
     private static List<DrinkItem> DrinksMenu { get; set; } = new();
     private static Dictionary<int, string> TableAvailability { get; set; } = new();
@@ -75,6 +76,17 @@ class Program
                         PrintOrderReceipt(SelectOrder());
                         break;
 
+                    case ConsoleKey.D9:
+                        Console.WriteLine("Are you sure? Y/N");
+                        confirm = GetConfirmation();
+
+                        if (confirm)
+                        {
+                            Logout();
+                            Console.Clear();
+                        }
+                        break;
+
                     case ConsoleKey.Q:
                         Console.WriteLine("Are you sure? Y/N");
                         confirm = GetConfirmation();
@@ -83,6 +95,7 @@ class Program
                         {
                             Logout();
                             Console.Clear();
+                            isUsing = false;
                         }
                         break;
 
@@ -122,9 +135,9 @@ class Program
             Console.WriteLine("Customer refused the receipt");
 
         FileManager.SaveRestaurantReceipt(order);
-        TableService.Tables.Find(x => x.TableNumber == order.Table.TableNumber).IsAvailable = true;
+        TableService.Tables.First(x => x.TableNumber == order.Table.TableNumber).IsAvailable = true;
         CurrentTable = null;
-        // OrderService.Orders.RemoveAll(x => x.OrderId == order.OrderId);
+        Orders.RemoveAll(x => x.OrderId == order.OrderId);
 
         Console.WriteLine("Press Q to go back.");
         GoBack();
@@ -174,14 +187,14 @@ class Program
             }
         }
 
-        OrderService.PlaceOrder(CurrentTable, order, CurrentUser.Name);
+        Orders.Add(OrderService.PlaceOrder(CurrentTable, order, CurrentUser.Name));
     }
 
     private static Order SelectOrder()
     {
         PrintHeader();
 
-        var selection = OrderService.Orders.Where(x => x.WaiterName == CurrentUser.Name).ToList();
+        var selection = Orders.Where(x => x.WaiterName == CurrentUser.Name).ToList();
 
         Console.WriteLine("Available orders:");
         for (int i = 0; i < selection.Count; i++)
@@ -350,8 +363,9 @@ class Program
             Console.WriteLine("4. Remove table form selection");
             Console.WriteLine("5. Print receipt");
         }
+        Console.WriteLine("\n9. Logout");
         Console.WriteLine("\n\n");
-        Console.WriteLine("Q. Logout");
+        Console.WriteLine("Q. Quit");
     }
 
     private static bool GetConfirmation()
