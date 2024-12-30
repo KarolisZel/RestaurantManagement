@@ -338,7 +338,7 @@ class Program
         return order;
     }
 
-    public static void PrintHeader()
+    private static void PrintHeader()
     {
         Console.Clear();
         Console.WriteLine("'NameHere' Restaurant\n");
@@ -352,7 +352,7 @@ class Program
         Console.WriteLine("\n");
     }
 
-    public static void PrintStartMenu()
+    private static void PrintStartMenu()
     {
         PrintHeader();
         Console.WriteLine("Please select your next step...\n");
@@ -369,7 +369,7 @@ class Program
         Console.WriteLine("Q. Quit");
     }
 
-    public static bool GetConfirmation()
+    private static bool GetConfirmation()
     {
         // Confirmation logic
         var result = false;
@@ -389,7 +389,7 @@ class Program
         return result;
     }
 
-    public static void Logout()
+    private static void Logout()
     {
         if (CurrentUser is null)
             Console.WriteLine("Please login first!");
@@ -426,7 +426,7 @@ class Program
         }
     }
 
-    public static void GoBack()
+    private static void GoBack()
     {
         // Wait for correct key press
         var k = Console.ReadKey(true);
