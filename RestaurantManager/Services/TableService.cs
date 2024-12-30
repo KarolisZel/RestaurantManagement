@@ -5,21 +5,21 @@ public static class TableService
     public static List<Table> Tables { get; set; } = new();
     public static Dictionary<int, string> TableAvailability { get; set; } = new();
 
-    public static Table GetAvailableTable(int seats)
-    {
-        try
-        {
-            var table = Tables.FirstOrDefault(t => t.IsAvailable && t.SeatCount >= seats);
-
-            return table;
-        }
-        catch (NullReferenceException e)
-        {
-            Console.WriteLine($"Table is null {e.Message}");
-        }
-
-        return null;
-    }
+    // public static Table GetAvailableTable(int seats)
+    // {
+    //     try
+    //     {
+    //         var table = Tables.FirstOrDefault(t => t.IsAvailable && t.SeatCount >= seats);
+    //
+    //         return table;
+    //     }
+    //     catch (NullReferenceException e)
+    //     {
+    //         Console.WriteLine($"Table is null {e.Message}");
+    //     }
+    //
+    //     return null;
+    // }
 
     public static Table GetTable(int tableNumber)
     {

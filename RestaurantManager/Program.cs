@@ -2,20 +2,19 @@
 
 class Program
 {
-    public static readonly OrderService OrderService = new();
-    public static List<Order> Orders { get; set; } = new();
-    public static List<FoodItem> FoodMenu { get; set; } = new();
-    public static List<DrinkItem> DrinksMenu { get; set; } = new();
-    public static Dictionary<int, string> TableAvailability { get; set; } = new();
+    private static readonly OrderService OrderService = new();
+    private static List<Order> Orders { get; set; } = new();
+    private static List<FoodItem> FoodMenu { get; set; } = new();
+    private static List<DrinkItem> DrinksMenu { get; set; } = new();
+    private static Dictionary<int, string> TableAvailability { get; set; } = new();
 
-    public static Waiter? CurrentUser { get; set; }
-    public static Table? CurrentTable { get; set; }
+    private static Waiter? CurrentUser { get; set; }
+    private static Table? CurrentTable { get; set; }
 
     public static void Main(string[] args)
     {
         CurrentUser = null;
         var isUsing = true;
-        bool confirm;
 
         FoodMenu = FileManager.LoadFoodMenu();
         DrinksMenu = FileManager.LoadDrinkMenu();
@@ -37,6 +36,7 @@ class Program
                 PrintStartMenu();
                 var sel = Console.ReadKey(true);
 
+                bool confirm;
                 switch (sel.Key)
                 {
                     case ConsoleKey.D1:
@@ -106,7 +106,7 @@ class Program
         }
     }
 
-    public static void PrintOrderReceipt(Order order)
+    private static void PrintOrderReceipt(Order order)
     {
         PrintHeader();
 
@@ -144,12 +144,12 @@ class Program
         GoBack();
     }
 
-    public static void StartOrder()
+    private static void StartOrder()
     {
         var isAdding = true;
         var order = new List<MenuItem>();
 
-        while (isAdding)
+        while (isAdding && CurrentTable is not null)
         {
             PrintCurrentOrder(order);
 
@@ -191,7 +191,7 @@ class Program
         Orders.Add(OrderService.PlaceOrder(CurrentTable, order, CurrentUser.Name));
     }
 
-    public static Order SelectOrder()
+    private static Order SelectOrder()
     {
         PrintHeader();
 
@@ -218,7 +218,7 @@ class Program
         return selection.Find(x => x.OrderId == id);
     }
 
-    public static void ModifyOrder(Order order)
+    private static void ModifyOrder(Order order)
     {
         var isModify = true;
 
@@ -273,7 +273,7 @@ class Program
         OrderService.Orders.Add(order);
     }
 
-    public static void PrintCurrentOrder(List<MenuItem> order)
+    private static void PrintCurrentOrder(List<MenuItem> order)
     {
         PrintHeader();
 
@@ -287,7 +287,7 @@ class Program
         }
     }
 
-    public static List<MenuItem> AddDrinks(List<MenuItem> order)
+    private static List<MenuItem> AddDrinks(List<MenuItem> order)
     {
         PrintHeader();
 
@@ -313,7 +313,7 @@ class Program
         return order;
     }
 
-    public static List<MenuItem> AddFood(List<MenuItem> order)
+    private static List<MenuItem> AddFood(List<MenuItem> order)
     {
         PrintHeader();
 
@@ -400,7 +400,7 @@ class Program
         }
     }
 
-    public static Table SelectTable()
+    private static Table SelectTable()
     {
         GetAvailableTables();
         Console.WriteLine("\nEnter table number:");
@@ -414,7 +414,7 @@ class Program
         return TableService.GetTable(tableNumber);
     }
 
-    public static void GetAvailableTables()
+    private static void GetAvailableTables()
     {
         PrintHeader();
         Console.WriteLine("\n");

@@ -42,7 +42,7 @@ static class FileManager
     public static void SendReceiptViaEmail(string recipient, Order order)
     {
         var filePath =
-            $@"C:\Users\koral\RiderProjects\Restaurant\RestaurantManager\EmailReceipts\CustomerReceipt";
+            $@"C:\Users\koral\RiderProjects\Restaurant\RestaurantManager\EmailReceipts\CustomerReceipt.json";
         var senderEmail = "from@emial.com";
         var senderPassword = "a02aed49ac2fa4";
         var smtpHost = "sandbox.smtp.mailtrap.io";

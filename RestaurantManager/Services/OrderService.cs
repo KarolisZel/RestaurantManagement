@@ -2,14 +2,14 @@ namespace RestaurantManager;
 
 public class OrderService
 {
-    public List<Order> Orders = new();
-    private int NextOrderId = 1;
+    public readonly List<Order> Orders = new();
+    private int _nextOrderId = 1;
 
     public Order PlaceOrder(Table table, List<MenuItem> items, string waiterName)
     {
         var order = new Order
         {
-            OrderId = NextOrderId++,
+            OrderId = _nextOrderId++,
             Table = table,
             Items = items,
             OrderTime = DateTime.Now,
@@ -23,7 +23,8 @@ public class OrderService
     public Order RemoveItem(Order order)
     {
         Console.WriteLine("Order Items:");
-        Console.WriteLine($"\t{string.Join(",\n\t", order.Items)}");
+        foreach (var item in order.Items)
+            Console.WriteLine($"\t{item.Name}: \t${item.Price}");
         Console.WriteLine();
 
         Console.WriteLine("Specify, what needs removing");
