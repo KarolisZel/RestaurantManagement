@@ -1,19 +1,17 @@
-﻿using System.Xml.Linq;
-
-namespace RestaurantManager;
+﻿namespace RestaurantManager;
 
 class Program
 {
-    private static readonly OrderService OrderService = new();
-    private static List<Order> Orders { get; set; } = new();
-    private static List<FoodItem> FoodMenu { get; set; } = new();
-    private static List<DrinkItem> DrinksMenu { get; set; } = new();
-    private static Dictionary<int, string> TableAvailability { get; set; } = new();
+    public static readonly OrderService OrderService = new();
+    public static List<Order> Orders { get; set; } = new();
+    public static List<FoodItem> FoodMenu { get; set; } = new();
+    public static List<DrinkItem> DrinksMenu { get; set; } = new();
+    public static Dictionary<int, string> TableAvailability { get; set; } = new();
 
-    private static Waiter? CurrentUser { get; set; }
-    private static Table? CurrentTable { get; set; }
+    public static Waiter? CurrentUser { get; set; }
+    public static Table? CurrentTable { get; set; }
 
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
         CurrentUser = null;
         var isUsing = true;
@@ -108,7 +106,7 @@ class Program
         }
     }
 
-    private static void PrintOrderReceipt(Order order)
+    public static void PrintOrderReceipt(Order order)
     {
         PrintHeader();
 
@@ -146,7 +144,7 @@ class Program
         GoBack();
     }
 
-    private static void StartOrder()
+    public static void StartOrder()
     {
         var isAdding = true;
         var order = new List<MenuItem>();
@@ -193,7 +191,7 @@ class Program
         Orders.Add(OrderService.PlaceOrder(CurrentTable, order, CurrentUser.Name));
     }
 
-    private static Order SelectOrder()
+    public static Order SelectOrder()
     {
         PrintHeader();
 
@@ -220,7 +218,7 @@ class Program
         return selection.Find(x => x.OrderId == id);
     }
 
-    private static void ModifyOrder(Order order)
+    public static void ModifyOrder(Order order)
     {
         var isModify = true;
 
@@ -275,7 +273,7 @@ class Program
         OrderService.Orders.Add(order);
     }
 
-    private static void PrintCurrentOrder(List<MenuItem> order)
+    public static void PrintCurrentOrder(List<MenuItem> order)
     {
         PrintHeader();
 
@@ -289,7 +287,7 @@ class Program
         }
     }
 
-    private static List<MenuItem> AddDrinks(List<MenuItem> order)
+    public static List<MenuItem> AddDrinks(List<MenuItem> order)
     {
         PrintHeader();
 
@@ -302,7 +300,7 @@ class Program
         Console.WriteLine("Specify item:");
         var input = Console.ReadLine();
 
-        if (string.IsNullOrWhiteSpace(input) && DrinksMenu.Any(x => x.Name == input))
+        if (string.IsNullOrWhiteSpace(input) || !DrinksMenu.Any(x => x.Name == input))
         {
             Console.WriteLine("Bad input. Try again...");
             input = Console.ReadLine();
@@ -315,7 +313,7 @@ class Program
         return order;
     }
 
-    private static List<MenuItem> AddFood(List<MenuItem> order)
+    public static List<MenuItem> AddFood(List<MenuItem> order)
     {
         PrintHeader();
 
@@ -327,7 +325,7 @@ class Program
         Console.WriteLine("Specify item:");
         var input = Console.ReadLine();
 
-        if (string.IsNullOrWhiteSpace(input) && FoodMenu.Any(x => x.Name == input))
+        if (string.IsNullOrWhiteSpace(input) || !FoodMenu.Any(x => x.Name == input))
         {
             Console.WriteLine("Bad input. Try again...");
             input = Console.ReadLine();
@@ -340,7 +338,7 @@ class Program
         return order;
     }
 
-    private static void PrintHeader()
+    public static void PrintHeader()
     {
         Console.Clear();
         Console.WriteLine("'NameHere' Restaurant\n");
@@ -354,7 +352,7 @@ class Program
         Console.WriteLine("\n");
     }
 
-    private static void PrintStartMenu()
+    public static void PrintStartMenu()
     {
         PrintHeader();
         Console.WriteLine("Please select your next step...\n");
@@ -371,7 +369,7 @@ class Program
         Console.WriteLine("Q. Quit");
     }
 
-    private static bool GetConfirmation()
+    public static bool GetConfirmation()
     {
         // Confirmation logic
         var result = false;
@@ -391,7 +389,7 @@ class Program
         return result;
     }
 
-    private static void Logout()
+    public static void Logout()
     {
         if (CurrentUser is null)
             Console.WriteLine("Please login first!");
@@ -402,7 +400,7 @@ class Program
         }
     }
 
-    private static Table SelectTable()
+    public static Table SelectTable()
     {
         GetAvailableTables();
         Console.WriteLine("\nEnter table number:");
@@ -416,7 +414,7 @@ class Program
         return TableService.GetTable(tableNumber);
     }
 
-    private static void GetAvailableTables()
+    public static void GetAvailableTables()
     {
         PrintHeader();
         Console.WriteLine("\n");
@@ -428,7 +426,7 @@ class Program
         }
     }
 
-    private static void GoBack()
+    public static void GoBack()
     {
         // Wait for correct key press
         var k = Console.ReadKey(true);
